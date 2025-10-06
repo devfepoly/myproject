@@ -13,15 +13,18 @@
     "check-db": "node checkDatabase.js"
   },
   "dependencies": {
+    "@tailwindcss/cli": "^4.1.14",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^17.2.2",
+    "ejs": "^3.1.10",
     "express": "^4.21.2",
     "hbs": "^4.2.0",
     "http-errors": "~1.6.3",
     "mongoose": "^8.18.1",
-    "morgan": "^1.10.1"
+    "morgan": "^1.10.1",
+    "tailwindcss": "^4.1.14"
   },
   "devDependencies": {
     "nodemon": "^3.0.0"

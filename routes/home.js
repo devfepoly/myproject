@@ -1,9 +1,9 @@
 import express from 'express';
 const router = express.Router();
 
-/* GET website listing. */
+/* GET home page. */
 router.get('/', (req, res, next) => {
-  res.send('website route');
+  res.render('home');
 });
 
 export default router;

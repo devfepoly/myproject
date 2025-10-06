@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@theme {
+  --color-cellphones-50: #fbe6e8;
+  --color-cellphones-100: #f3b0b7;
+  --color-cellphones-200: #ed8a95;
+  --color-cellphones-300: #e45464;
+  --color-cellphones-400: #df3346;
+  --color-cellphones-500: #d70018;
+  --color-cellphones-600: #c40016;
+  --color-cellphones-700: #901;
+  --color-cellphones-800: #76000d;
+  --color-cellphones-900: #5a000a;
+}
