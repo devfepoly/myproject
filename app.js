@@ -2,10 +2,10 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import express from 'express';
-import createError from 'http-errors';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import dotenv from 'dotenv';
+import db from './config/database.js';
 
 import homeRouter from './routes/home.js';
 
@@ -35,6 +35,8 @@ app.use('/', homeRouter);
 // Start server
 (async () => {
   try {
+    await db.command({ ping: 1 });
+    console.log('Connected successfully to MongoDB server');
     app.listen(process.env.PORT, process.env.HOST_NAME, () => {
       console.log(
         `Server is running at http://${process.env.HOST_NAME}:${process.env.PORT}`
