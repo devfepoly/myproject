@@ -1,14 +1,19 @@
-import { MongoClient } from "mongodb";
-import dotenv from "dotenv";
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 dotenv.config();
 
-const connectionString = process.env.DB_URI || "";
-const client = new MongoClient(connectionString);
-let conn;
-try {
-    conn = await client.connect();
-} catch (e) {
-    console.error(e);
-}
-let db = conn.db("laptop-shop");
-export default db;
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.DB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            dbName: process.env.DB_NAME
+        });
+        console.log('MongoDB connected');
+    } catch (error) {
+        console.error('MongoDB connection error:', error);
+        process.exit(1);
+    }
+};
+
+export default connectDB;
