@@ -1,6 +1,7 @@
 import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 import { gernerateToken } from '../services/JWTService.js';
+import { createUser } from '../services/CRUDService/UserService.js'
 
 async function register(req, res) {
     const { name, email, phone, password, confirm_password } = req.body;
@@ -46,14 +47,7 @@ async function register(req, res) {
     const password_hash = await bcrypt.hash(password, 10);
 
     // Create new user
-    const user = new User({
-        name,
-        email,
-        phone,
-        password_hash
-    });
-
-    await user.save();
+    await createUser({ name, email, phone, password_hash })
 
     // Redirect to login page after successful registration
     res.redirect('login');
@@ -89,7 +83,13 @@ async function login(req, res) {
     res.redirect('/');
 }
 
+async function logout(req, res) {
+    res.clearCookie('token');
+    res.redirect('/');
+}
+
 export {
     register,
     login,
+    logout
 }

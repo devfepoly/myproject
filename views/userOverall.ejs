@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAPTOPSHOP - <%= user.name %>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/output.css" />
+    <link rel="stylesheet" href="/stylesheets/slider.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+    <%- include("./partials/header.ejs") %>
+
+        <main class="pt-36 py-30 px-5 lg:px-20 text-black grid grid-cols-12 gap-5 bg-gray-200">
+            <section class="px-5 py-5 lg:px-8 lg:py-10 w-full h-fit col-span-12 grid grid-cols-12 gap-2 lg:gap-0 bg-white rounded-2xl">
+                <div
+                    class="col-span-12 lg:col-span-4 flex justify-start items-center gap-5 border-0 lg:border-r-4 lg:border-cellphones-500">
+                    <div
+                        class="p-2 flex justify-center items-center bg-gradient-to-b from-cellphones-50 to-cellphones-100 w-fit h-fit rounded-full">
+                        <img src="/asset/images/icons/avata-ant.b574f3e9.svg" alt="User Avatar"
+                            class="w-10 h-10 rounded-full object-cover">
+                    </div>
+                    <div class="h-full flex flex-col justify-start items-start">
+                        <h2 class="font-semibold text-xl">
+                            <%= user.name %>
+                        </h2>
+                        <p class="text-sm text-gray-500">
+                            <%= user.email %>
+                        </p>
+                        <div class="w-full text-sm text-gray-500 flex gap-2">
+                            <p id="profile-phone-number"></p>
+                            <button class="cursor-pointer" id="btn-toggle-profile-phone-number"></button>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="p-0 lg:px-4 col-span-6 lg:col-span-4 flex justify-start items-center gap-5 border-0 lg:border-r-4 lg:border-cellphones-500">
+                    <div
+                        class="p-2 flex justify-center items-center bg-gradient-to-b from-cellphones-50 to-cellphones-100 w-fit h-fit rounded-full">
+                        <img src="/asset/images/icons/cart-icon.3e4e1d83.svg" alt="Cart Icon"
+                            class="w-5 h-5 md:w-10 md:h-10 rounded-full object-cover">
+                    </div>
+                    <div class="flex flex-col justify-start items-start">
+                        <h2 class="text-xl lg:text-2xl font-semibold">
+                            <%= totalOrders %>
+                        </h2>
+                        <p class="text-sm text-gray-500">Tổng số đơn hàng đã mua</p>
+                    </div>
+                </div>
+                <div class="p-0 lg:px-4 col-span-6 lg:col-span-4 flex justify-start items-center gap-5 border-0">
+                    <div
+                        class="p-2 flex justify-center items-center bg-gradient-to-b from-cellphones-50 to-cellphones-100 w-fit h-fit rounded-full">
+                        <img src="/asset/images/icons/money-icon.3e6b67af.svg" alt="Money Icon"
+                            class="w-5 h-5 md:w-10 md:h-10 rounded-full object-cover">
+                    </div>
+                    <div class="flex flex-col justify-start items-start">
+                        <h2 id="grand-total-orders" class="text-xl lg:text-2xl font-semibold">
+                            <%= grandTotalOrders %>đ
+                        </h2>
+                        <p class="text-sm text-gray-500">Tổng tiền tích lũy</p>
+                        <div class="p-1 bg-gray-50 hidden lg:block">
+                            <p class="text-xs">Hãy mua nhiều hơn để nhận được nhiều <b>ưu đãi</b>.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- <section class="px-5 py-5 lg:px-8 lg:py-10 w-full h-fit col-span-12 lg:hidden bg-white rounded-2xl">
+            </section> -->
+
+            <section class="py-5 w-full h-fit hidden md:block md:col-span-4 lg:col-span-3 bg-white rounded-2xl">
+                <a href="" class="py-5 px-7 w-full flex justify-start items-center gap-3 bg-cellphones-50 text-lg text-cellphones-500 font-semibold border-l-4 border-cellphones-600">
+                    <i class="fa-regular fa-envelope-open"></i>
+                    Tổng quan
+                </a>
+                <a href="order"
+                    class="py-5 px-7 w-full flex justify-start items-center gap-3 hover:bg-cellphones-50 text-lg hover:text-cellphones-500 font-semibold hover:border-l-4 hover:border-cellphones-600">
+                    <i class="fa-regular fa-clipboard"></i>
+                    Lịch sử mua hàng
+                </a>
+                <a href="user/user-info"
+                    class="py-5 px-7 w-full flex justify-start items-center gap-3 hover:bg-cellphones-50 text-lg hover:text-cellphones-500 font-semibold hover:border-l-4 hover:border-cellphones-600">
+                    <i class="fa-regular fa-user"></i>
+                    Thông tin tài khoản
+                </a>
+                <a href="warranty"
+                    class="py-5 px-7 w-full flex justify-start items-center gap-3 hover:bg-cellphones-50 text-lg hover:text-cellphones-500 font-semibold hover:border-l-4 hover:border-cellphones-600">
+                    <i class="fa-regular fa-circle-check"></i>
+                    Chính sách bảo hành
+                </a>
+                <a href="support"
+                    class="py-5 px-7 w-full flex justify-start items-center gap-3 hover:bg-cellphones-50 text-lg hover:text-cellphones-500 font-semibold hover:border-l-4 hover:border-cellphones-600">
+                    <i class="fa-regular fa-envelope"></i>
+                    Góp ý - Phản hồi - Hỗ trợ
+                </a>
+                <form action="auth/logout" method="POST">
+                    <button class="py-5 px-7 w-full flex justify-start items-center gap-3 hover:bg-cellphones-50 text-lg hover:text-cellphones-500 font-semibold hover:border-l-4 hover:border-cellphones-600 border-t-2 border-gray-200 cursor-pointer">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Đăng xuất
+                    </button>
+                </form>
+            </section>
+
+            <section class="w-full h-fit col-span-12 md:col-span-8 lg:col-span-9 grid grid-cols-12 gap-3">
+                <div class="px-5 py-4 col-span-12 flex justify-between items-center gap-4 bg-blue-50 text-blue-500 border-2 border-blue-300 rounded-2xl">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <p class="flex-1 text-black">Thêm địa chỉ để đặt đơn hàng nhanh hơn.</p>
+                    <a href="user/user-info" class="font-semibold">Thêm địa chỉ</a>
+                </div>
+                <div class="p-4 col-span-12 xl:col-span-6 2xl:col-span-8 bg-white rounded-2xl">
+                    <h3 class="text-lg font-semibold">Đơn hàng gần đây</h3>
+                    <div id="recent-orders" class="mt-5 max-h-[500px] overflow-auto"></div>
+                </div>
+                <div class="p-4 col-span-12 xl:col-span-6 2xl:col-span-4 bg-white rounded-2xl">
+                    <h3 class="text-lg font-semibold">Ưu đãi của bạn</h3>
+                    <div id="vouchers" class="mt-5 max-h-[500px] overflow-auto"></div>
+                </div>
+                <div class="p-4 col-span-12 bg-white rounded-2xl">
+                    <h3 class="text-lg font-semibold">Sản phẩm yêu thích</h3>
+                    <div id="favourite-products" class="mt-5 max-h-[500px] overflow-auto"></div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Menu Mobile -->
+        <section
+            class="px-20 pb-5 pt-1 fixed bottom-0 left-0 right-0 z-50 flex justify-between items-center md:hidden bg-white rounded-t-2xl"
+            style="box-shadow: 0 -8px 24px 0 rgba(0,0,0,0.12), 0 -1.5px 4px 0 rgba(0,0,0,0.10);">
+            <a href="/" class="pt-2 flex flex-col items-center text-cellphones-700 border-t-4 border-cellphones-600">
+                <i class="fa-solid fa-house text-xl"></i>
+                <span class="text-xs">Trang chủ</span>
+            </a>
+            <a href="/order" class="pt-2 flex flex-col items-center">
+                <i class="fa-regular fa-clipboard text-xl"></i>
+                <span class="text-xs">Đơn hàng</span>
+            </a>
+            <a href="/user/user-info" class="pt-2 flex flex-col items-center">
+                <i class="fa-regular fa-user text-xl"></i>
+                <span class="text-xs">Tài khoản</span>
+            </a>
+            <form action="/auth/logout" method="POST">
+                <button type="submit" class="pt-2 flex flex-col items-center">
+                    <i class="fa-solid fa-arrow-right-from-bracket text-xl"></i>
+                    <span class="text-xs">Đăng xuất</span>
+                </button>
+            </form>
+        </section>
+        
+        <%- include("./partials/footer.ejs") %>
+
+        <script>
+            const user = <%- JSON.stringify(user) %>;
+            const vouchers = <%- JSON.stringify(vouchers) %>;
+            const favouriteProducts = <%- JSON.stringify(favouriteProducts) %>;
+            const recentOrders = <%- JSON.stringify(recentOrders) %>;
+            const errors = <%- typeof errors !== 'undefined' ? JSON.stringify(errors) : '[]' %>;
+        </script>
+        <script src="/js/userOverall.js"></script>
+
+</body>
+
+</html>

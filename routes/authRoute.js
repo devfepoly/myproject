@@ -3,24 +3,29 @@ import * as authController from '../controllers/authController.js'
 import authMiddleware from '../middlewares/authMiddleware.js';
 const router = express.Router();
 
-// GET Method
-router.get('/login', authMiddleware,(req, res) => {
+/* GET login page */
+router.get('/login', authMiddleware, (req, res) => {
     if (req.user) {
         return res.redirect('/');
     }
     res.render('login');
 });
 
-router.get('/register', authMiddleware,(req, res) => {
+/* GET register page */
+router.get('/register', authMiddleware, (req, res) => {
     if (req.user) {
         return res.redirect('/');
     }
     res.render('register');
 });
 
-// POST Method
+/* POST register */
 router.post('/register', authController.register)
 
+/* POST login */
 router.post('/login', authController.login)
+
+/* POST logout */
+router.post('/logout', authController.logout)
 
 export default router;

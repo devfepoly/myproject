@@ -1,0 +1,12 @@
+import mongoose from "mongoose";
+
+const colorSchema = new mongoose.Schema(
+    {
+        name: { type: String, required: true, trim: true },
+        code: { type: String, required: true, trim: true },
+    },
+    { timestamps: true }
+);
+
+const Color = mongoose.model("Color", colorSchema);
+export default Color;

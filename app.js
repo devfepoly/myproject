@@ -9,7 +9,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/database.js';
 
 import authMiddleware from './middlewares/authMiddleware.js';
-import { homeRoute, authRoute } from './routes/index.js';
+import { indexRoute, authRoute, userRoute } from './routes/index.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -37,8 +37,9 @@ app.use(express.static(path.join(__dirname, 'public'))); // Serve static files
 app.use(authMiddleware);
 
 // Register routes
-app.use('/', homeRoute);
+app.use('/', indexRoute);
 app.use('/auth', authRoute);
+app.use('/user', userRoute);
 
 // Start server
 (async () => {
