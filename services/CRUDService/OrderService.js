@@ -26,9 +26,29 @@ export async function getOrdersByFilter(filter = {}, options = {}) {
     ];
 
     const query = {};
+
     for (const key of allowedFields) {
         if (filter[key] !== undefined) {
             query[key] = filter[key];
+        }
+    }
+
+    if (filter.startDate || filter.endDate) {
+        query.createdAt = {};
+
+        if (filter.startDate) {
+            const start = new Date(filter.startDate);
+            if (!isNaN(start)) {
+                query.createdAt.$gte = start;
+            }
+        }
+
+        if (filter.endDate) {
+            const end = new Date(filter.endDate);
+            if (!isNaN(end)) {
+                end.setHours(23, 59, 59, 999);
+                query.createdAt.$lte = end;
+            }
         }
     }
 

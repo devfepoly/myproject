@@ -9,7 +9,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/database.js';
 
 import authMiddleware from './middlewares/authMiddleware.js';
-import { indexRoute, authRoute, userRoute } from './routes/index.js';
+import { indexRoute, authRoute, userRoute, orderRoute } from './routes/index.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -40,6 +40,7 @@ app.use(authMiddleware);
 app.use('/', indexRoute);
 app.use('/auth', authRoute);
 app.use('/user', userRoute);
+app.use('/order', orderRoute);
 
 // Start server
 (async () => {

@@ -1,7 +1,7 @@
 import express from 'express';
+const router = express.Router();
 import authMiddleware from '../middlewares/authMiddleware.js';
 import * as userController from '../controllers/userController.js';
-const router = express.Router();
 
 /* GET user overall page. */
 router.get('/', authMiddleware, userController.getUserOverall)

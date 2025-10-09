@@ -13,7 +13,7 @@ async function getUserOverall(req, res) {
         const grandTotalOrders = orders.reduce((prev, curr) => prev + curr.grand_total, 0)
         const recentOrders = orders.slice(0, 5);        
 
-        res.render('userOverall', { user: req.user, totalOrders: orders.length, recentOrders, grandTotalOrders, vouchers: [], favouriteProducts: [] });
+        res.render('userOverall', { totalOrders: orders.length, grandTotalOrders, recentOrders, vouchers: [], favouriteProducts: [] });
     } catch (error) {
         console.error('Error updating profile:', error);
         res.status(500).render('/', {

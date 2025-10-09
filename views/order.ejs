@@ -4,18 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAPTOPSHOP - Tổng quan
+    <title>LAPTOPSHOP - Đơn hàng
     </title>
     <link rel="stylesheet" href="/stylesheets/output.css" />
     <link rel="stylesheet" href="/stylesheets/slider.css" />
+    <link rel="stylesheet" href="/stylesheets/dateTimePicker.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        .choosen {
+            color: #d70018;
+            font-weight: 600;
+            border-bottom: 3px solid #d70018;
+        }
+    </style>
 </head>
 
 <body>
     <%- include("./partials/header.ejs") %>
 
         <main class="pt-36 py-30 px-5 lg:px-20 text-black grid grid-cols-12 gap-5 bg-gray-200">
-            <section class="px-5 py-5 lg:px-8 lg:py-10 w-full h-fit col-span-12 grid grid-cols-12 gap-2 lg:gap-0 bg-white rounded-2xl">
+            <section
+                class="px-5 py-5 lg:px-8 lg:py-10 w-full h-fit col-span-12 grid grid-cols-12 gap-2 lg:gap-0 bg-white rounded-2xl">
                 <div
                     class="col-span-12 lg:col-span-4 flex justify-start items-center gap-5 border-0 lg:border-r-4 lg:border-cellphones-500">
                     <div
@@ -69,12 +78,13 @@
             </section>
 
             <section class="py-5 w-full h-fit hidden md:block md:col-span-4 lg:col-span-3 bg-white rounded-2xl">
-                <a href="" class="py-5 px-7 w-full flex justify-start items-center gap-3 bg-cellphones-50 text-lg text-cellphones-500 font-semibold border-l-4 border-cellphones-600">
+                <a href="user"
+                    class="py-5 px-7 w-full flex justify-start items-center gap-3 hover:bg-cellphones-50 text-lg hover:text-cellphones-500 font-semibold hover:border-l-4 hover:border-cellphones-600">
                     <i class="fa-regular fa-envelope-open"></i>
                     Tổng quan
                 </a>
                 <a href="order"
-                    class="py-5 px-7 w-full flex justify-start items-center gap-3 hover:bg-cellphones-50 text-lg hover:text-cellphones-500 font-semibold hover:border-l-4 hover:border-cellphones-600">
+                    class="py-5 px-7 w-full flex justify-start items-center gap-3 bg-cellphones-50 text-lg text-cellphones-500 font-semibold border-l-4 border-cellphones-600">
                     <i class="fa-regular fa-clipboard"></i>
                     Lịch sử mua hàng
                 </a>
@@ -94,43 +104,54 @@
                     Góp ý - Phản hồi - Hỗ trợ
                 </a>
                 <form action="auth/logout" method="POST">
-                    <button class="py-5 px-7 w-full flex justify-start items-center gap-3 hover:bg-cellphones-50 text-lg hover:text-cellphones-500 font-semibold hover:border-l-4 hover:border-cellphones-600 border-t-2 border-gray-200 cursor-pointer">
+                    <button
+                        class="py-5 px-7 w-full flex justify-start items-center gap-3 hover:bg-cellphones-50 text-lg hover:text-cellphones-500 font-semibold hover:border-l-4 hover:border-cellphones-600 border-t-2 border-gray-200 cursor-pointer">
                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                         Đăng xuất
                     </button>
                 </form>
             </section>
 
-            <section class="w-full h-fit col-span-12 md:col-span-8 lg:col-span-9 grid grid-cols-12 gap-3">
-                <div class="px-5 py-4 col-span-12 flex justify-between items-center gap-4 bg-blue-50 text-blue-500 border-2 border-blue-300 rounded-2xl">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-                    <p class="flex-1 text-black">Thêm địa chỉ để đặt đơn hàng nhanh hơn.</p>
-                    <a href="user/user-info" class="font-semibold">Thêm địa chỉ</a>
+            <section class="py-3 px-5 w-full h-fit col-span-12 md:col-span-8 lg:col-span-9 grid grid-cols-12 gap-3 bg-white rounded-2xl">
+                <h3 class="col-span-12 text-center lg:text-left text-xl font-semibold">Lịch sử mua hàng</h3>
+                <!-- Filter by Status -->
+                <ul class="col-span-12 flex justify-start items-center flex-wrap gap-1">
+                    <li class="options pb-4 px-5 lg:px-9 text-sm lg:text-[16px] text-gray-300 cursor-pointer" data-status="">Tất cả</li>
+                    <li class="options pb-4 px-5 lg:px-9 text-sm lg:text-[16px] text-gray-300 cursor-pointer" data-status="pending">Chờ xác nhận</li>
+                    <li class="options pb-4 px-5 lg:px-9 text-sm lg:text-[16px] text-gray-300 cursor-pointer" data-status="paid">Đã xác nhận</li>
+                    <li class="options pb-4 px-5 lg:px-9 text-sm lg:text-[16px] text-gray-300 cursor-pointer" data-status="shipped">Đang vận chuyển</li>
+                    <li class="options pb-4 px-5 lg:px-9 text-sm lg:text-[16px] text-gray-300 cursor-pointer" data-status="completed">Đã giao hàng</li>
+                    <li class="options pb-4 px-5 lg:px-9 text-sm lg:text-[16px] text-gray-300 cursor-pointer" data-status="cancelled">Đã hủy</li>
+                </ul>
+                <!-- Filter by Date -->
+                <div class="col-span-12 flex justify-start items-center flex-wrap gap-5">
+                    <div class="date-range-container">
+                        <label for="start-date" class="text-sm">Từ ngày:</label>
+                        <input type="date" id="start-date" name="start-date">
+                    
+                        <label for="end-date">đến</label>
+                        <input type="date" id="end-date" name="end-date">
+                    </div>
+
+                    <button id="btn-filter-by-date" class="py-2 px-8 bg-cellphones-300 hover:bg-cellphones-600 text-white font-semibold rounded-xl cursor-pointer">Lọc</button>
+                    <button id="btn-cancel-filter-by-date" class="py-2 px-8 bg-gray-100 hover:bg-gray-400 text-black font-semibold rounded-xl cursor-pointer">Xóa lọc</button>
                 </div>
-                <div class="p-4 col-span-12 xl:col-span-6 2xl:col-span-8 bg-white rounded-2xl">
-                    <h3 class="text-lg font-semibold">Đơn hàng gần đây</h3>
-                    <div id="recent-orders" class="mt-5 max-h-[500px] overflow-auto"></div>
-                </div>
-                <div class="p-4 col-span-12 xl:col-span-6 2xl:col-span-4 bg-white rounded-2xl">
-                    <h3 class="text-lg font-semibold">Ưu đãi của bạn</h3>
-                    <div id="vouchers" class="mt-5 max-h-[500px] overflow-auto"></div>
-                </div>
-                <div class="p-4 col-span-12 bg-white rounded-2xl">
-                    <h3 class="text-lg font-semibold">Sản phẩm yêu thích</h3>
-                    <div id="favourite-products" class="mt-5 max-h-[500px] overflow-auto"></div>
+
+                <div class="min-h-[800px] max-h-[1000px] col-span-12 flex flex-col overflow-auto">
+
                 </div>
             </section>
         </main>
-        
+
         <!-- Menu Mobile -->
         <section
             class="px-20 pb-5 pt-1 fixed bottom-0 left-0 right-0 z-50 flex justify-between items-center md:hidden bg-white rounded-t-2xl"
             style="box-shadow: 0 -8px 24px 0 rgba(0,0,0,0.12), 0 -1.5px 4px 0 rgba(0,0,0,0.10);">
-            <a href="/" class="pt-2 flex flex-col items-center text-cellphones-700 border-t-4 border-cellphones-600">
+            <a href="/" class="pt-2 flex flex-col items-center">
                 <i class="fa-solid fa-house text-xl"></i>
                 <span class="text-xs">Trang chủ</span>
             </a>
-            <a href="/order" class="pt-2 flex flex-col items-center">
+            <a href="/order" class="pt-2 flex flex-col items-center text-cellphones-700 border-t-4 border-cellphones-600">
                 <i class="fa-regular fa-clipboard text-xl"></i>
                 <span class="text-xs">Đơn hàng</span>
             </a>
@@ -145,18 +166,14 @@
                 </button>
             </form>
         </section>
-        
+
         <%- include("./partials/footer.ejs") %>
 
         <script>
             const user = <%- JSON.stringify(user) %>;
-            const vouchers = <%- JSON.stringify(vouchers) %>;
-            const favouriteProducts = <%- JSON.stringify(favouriteProducts) %>;
-            const recentOrders = <%- JSON.stringify(recentOrders) %>;
-            const errors = <%- typeof errors !== 'undefined' ? JSON.stringify(errors) : '[]' %>;
         </script>
-        <script src="/js/userOverall.js"></script>
-
+        <script src="/js/order.js"></script>
+        <script src="/js/dateTimePicker.js"></script>
 </body>
 
 </html>
