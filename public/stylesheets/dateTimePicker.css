@@ -1,0 +1,12 @@
+.date-range-container {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.date-range-container input[type="date"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}

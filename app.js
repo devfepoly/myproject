@@ -3,11 +3,13 @@ import { fileURLToPath } from 'url';
 
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 import logger from 'morgan';
 import dotenv from 'dotenv';
-import db from './config/database.js';
+import connectDB from './config/database.js';
 
-import homeRouter from './routes/home.js';
+import authMiddleware from './middlewares/authMiddleware.js';
+import { indexRoute, authRoute, userRoute, orderRoute } from './routes/index.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -27,16 +29,23 @@ app.use(logger('dev')); // HTTP request logger
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: false })); // Parse URL-encoded bodies
 app.use(cookieParser()); // Parse cookies
+app.use(bodyParser.urlencoded()) // parse application/x-www-form-urlencoded
+app.use(bodyParser.json()) // parse application/json
 app.use(express.static(path.join(__dirname, 'public'))); // Serve static files
 
+// Middelware
+app.use(authMiddleware);
+
 // Register routes
-app.use('/', homeRouter);
+app.use('/', indexRoute);
+app.use('/auth', authRoute);
+app.use('/user', userRoute);
+app.use('/order', orderRoute);
 
 // Start server
 (async () => {
   try {
-    await db.command({ ping: 1 });
-    console.log('Connected successfully to MongoDB server');
+    await connectDB();
     app.listen(process.env.PORT, process.env.HOST_NAME, () => {
       console.log(
         `Server is running at http://${process.env.HOST_NAME}:${process.env.PORT}`
