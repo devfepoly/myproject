@@ -1,4 +1,5 @@
 import User from '../../models/User.js';
+import Address from '../../models/Address.js';
 
 export async function createUser(userData) {
     const user = new User(userData);
@@ -10,7 +11,7 @@ export async function getAllUsers() {
 }
 
 export async function getUserById(id) {
-    return await User.findById(id);
+    return await User.findById(id)
 }
 
 export async function getUserByEmail(email) {

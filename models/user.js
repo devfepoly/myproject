@@ -1,4 +1,3 @@
-// models/User.js
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
@@ -23,6 +22,16 @@ const userSchema = new mongoose.Schema(
         password_hash: {
             type: String,
             required: true,
+        },
+        gender: {
+            type: String,
+            enum: ["male", "female", "other"],
+            default: null,
+        },
+        provider: {
+            type: String,
+            enum: ["local", "google", "facebook", "github"],
+            default: "local",
         },
         role: {
             type: String,

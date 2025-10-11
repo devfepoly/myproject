@@ -1,13 +1,46 @@
 import mongoose from "mongoose";
 
-const productSpecSchema = new mongoose.Schema(
-    {
-        product_id: { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
-        key: { type: String, required: true, trim: true },
-        value: { type: String, required: true, trim: true },
+const productSpecSchema = new mongoose.Schema({
+    processor: {
+        type: String,
+        required: true
     },
-    { timestamps: true }
-);
+    ram: {
+        type: Number,
+        required: true
+    },
+    storage: {
+        type: String,
+        required: true
+    },
+    gpu: {
+        type: String
+    },
+    screen_size: {
+        type: Number
+    },
+    screen_resolution: {
+        type: String
+    },
+    operating_system: {
+        type: String
+    },
+    weight: {
+        type: Number
+    },
+    warranty_months: {
+        type: Number,
+        default: 12
+    },
+    created_at: {
+        type: Date,
+        default: Date.now
+    },
+    product_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+        required: true
+    }
+});
 
-const ProductSpec = mongoose.model("ProductSpec", productSpecSchema);
-export default ProductSpec;
+export default mongoose.model("ProductSpec", productSpecSchema);

@@ -2,14 +2,16 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import express from 'express';
+import session from "express-session";
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import dotenv from 'dotenv';
 import connectDB from './config/database.js';
+import methodOverride from "method-override";
 
 import authMiddleware from './middlewares/authMiddleware.js';
-import { indexRoute, authRoute, userRoute, orderRoute } from './routes/index.js';
+import { indexRoute, authRoute, userRoute, orderRoute, addressRoute } from './routes/index.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -25,13 +27,26 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // Middleware setup
-app.use(logger('dev')); // HTTP request logger
-app.use(express.json()); // Parse JSON bodies
-app.use(express.urlencoded({ extended: false })); // Parse URL-encoded bodies
-app.use(cookieParser()); // Parse cookies
-app.use(bodyParser.urlencoded()) // parse application/x-www-form-urlencoded
-app.use(bodyParser.json()) // parse application/json
-app.use(express.static(path.join(__dirname, 'public'))); // Serve static files
+app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(methodOverride('_method'));
+app.use(logger('dev'));
+app.use(express.json());
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    secret: process.env.JWT_SECRET,
+    resave: false,
+    saveUninitialized: true
+}));
+app.use((req, res, next) => {
+    res.locals.errors = req.session.errors || {};
+    res.locals.successes = req.session.successes || {};
+    delete req.session.errors;
+    delete req.session.successes;
+    next();
+});
 
 // Middelware
 app.use(authMiddleware);
@@ -41,6 +56,7 @@ app.use('/', indexRoute);
 app.use('/auth', authRoute);
 app.use('/user', userRoute);
 app.use('/order', orderRoute);
+app.use('/address', addressRoute);
 
 // Start server
 (async () => {

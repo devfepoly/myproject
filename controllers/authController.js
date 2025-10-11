@@ -88,8 +88,69 @@ async function logout(req, res) {
     res.redirect('/');
 }
 
+async function changePassword(req, res) {
+    if (!req.user) {
+        return res.render('auth/login', {
+            errors: { changePassword: ['Vui lòng đăng nhập để thực hiện chức năng này.'] }
+        });
+    }
+
+    const { old_password, new_password, confirm_new_password } = req.body;
+    const errors = {};
+    const successes = {};
+
+    // Validate các trường
+    if (!old_password || !new_password || !confirm_new_password) {
+        errors.changePassword = ['Vui lòng điền đầy đủ các trường.'];
+    } else {
+        if (new_password !== confirm_new_password) {
+            errors.changePassword = ['Mật khẩu mới không khớp.'];
+        } else if (new_password.length < 6) {
+            errors.changePassword = ['Mật khẩu mới phải có ít nhất 6 ký tự.'];
+        }
+    }
+
+    if (Object.keys(errors).length > 0) {
+        req.session.errors = errors;
+        const redirectUrl = req.headers.referer || '/user/profile';
+        return res.redirect(redirectUrl);
+    }
+
+    try {
+        const user = await User.findById(req.user._id);
+        if (!user) {
+            req.session.errors = { changePassword: ['Người dùng không tồn tại.'] };
+            const redirectUrl = req.headers.referer || '/user/profile';
+            return res.redirect(redirectUrl);
+        }
+
+        const isMatch = await bcrypt.compare(old_password, user.password_hash);
+        if (!isMatch) {
+            req.session.errors = { changePassword: ['Mật khẩu cũ không đúng.'] };
+            const redirectUrl = req.headers.referer || '/user/profile';
+            return res.redirect(redirectUrl);
+        }
+
+        const new_password_hash = await bcrypt.hash(new_password, 10);
+        await User.findByIdAndUpdate(user._id, { password_hash: new_password_hash });
+
+        successes.changePassword = true;
+        req.session.successes = successes;
+
+        const redirectUrl = req.headers.referer || '/user/profile';
+        return res.redirect(redirectUrl);
+
+    } catch (error) {
+        console.error('Error changing password:', error);
+        req.session.errors = { changePassword: ['Đã xảy ra lỗi server. Vui lòng thử lại sau.'] };
+        const redirectUrl = req.headers.referer || '/user/profile';
+        return res.redirect(redirectUrl);
+    }
+}
+
 export {
     register,
     login,
-    logout
+    logout,
+    changePassword
 }

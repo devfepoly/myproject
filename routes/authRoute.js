@@ -28,4 +28,7 @@ router.post('/login', authController.login)
 /* POST logout */
 router.post('/logout', authController.logout)
 
+/* PATCH change password */
+router.patch('/change-password', authMiddleware, authController.changePassword)
+
 export default router;

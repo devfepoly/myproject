@@ -6,7 +6,11 @@ import * as userController from '../controllers/userController.js';
 /* GET user overall page. */
 router.get('/', authMiddleware, userController.getUserOverall)
 
+/* GET user info page. */
+router.get('/user-info', authMiddleware, userController.getUserInfo)
+
 /* POST update profile */
-router.post('/update', authMiddleware, userController.updateUserProfile)
+router.patch("/update", authMiddleware, userController.updateUserProfile);
+
 
 export default router;
