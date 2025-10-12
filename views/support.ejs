@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAPTOPSHOP - Tổng quan
+    <title>LAPTOPSHOP - Hỗ trợ
     </title>
     <link rel="stylesheet" href="/stylesheets/output.css" />
     <link rel="stylesheet" href="/stylesheets/slider.css" />
@@ -15,7 +15,8 @@
     <%- include("./partials/header.ejs") %>
 
         <main class="pt-36 py-30 px-5 lg:px-20 text-black grid grid-cols-12 gap-5 bg-gray-200">
-            <section class="px-5 py-5 lg:px-8 lg:py-10 w-full h-fit col-span-12 grid grid-cols-12 gap-2 lg:gap-0 bg-white rounded-2xl">
+            <section
+                class="px-5 py-5 lg:px-8 lg:py-10 w-full h-fit col-span-12 grid grid-cols-12 gap-2 lg:gap-0 bg-white rounded-2xl">
                 <div
                     class="col-span-12 lg:col-span-4 flex justify-start items-center gap-5 border-0 lg:border-r-4 lg:border-cellphones-500">
                     <div
@@ -69,7 +70,8 @@
             </section>
 
             <section class="py-5 w-full h-fit hidden md:block md:col-span-4 lg:col-span-3 bg-white rounded-2xl">
-                <a href="" class="py-5 px-7 w-full flex justify-start items-center gap-3 bg-cellphones-50 text-lg text-cellphones-500 font-semibold border-l-4 border-cellphones-600">
+                <a href="/user"
+                    class="py-5 px-7 w-full flex justify-start items-center gap-3 hover:bg-cellphones-50 text-lg hover:text-cellphones-500 font-semibold hover:border-l-4 hover:border-cellphones-600">
                     <i class="fa-regular fa-envelope-open"></i>
                     Tổng quan
                 </a>
@@ -89,44 +91,78 @@
                     Chính sách bảo hành
                 </a>
                 <a href="/support"
-                    class="py-5 px-7 w-full flex justify-start items-center gap-3 hover:bg-cellphones-50 text-lg hover:text-cellphones-500 font-semibold hover:border-l-4 hover:border-cellphones-600">
+                    class="py-5 px-7 w-full flex justify-start items-center gap-3 bg-cellphones-50 text-lg text-cellphones-500 font-semibold border-l-4 border-cellphones-600">
                     <i class="fa-regular fa-envelope"></i>
                     Góp ý - Phản hồi - Hỗ trợ
                 </a>
                 <form action="/auth/logout" method="POST">
-                    <button class="py-5 px-7 w-full flex justify-start items-center gap-3 hover:bg-cellphones-50 text-lg hover:text-cellphones-500 font-semibold hover:border-l-4 hover:border-cellphones-600 border-t-2 border-gray-200 cursor-pointer">
+                    <button
+                        class="py-5 px-7 w-full flex justify-start items-center gap-3 hover:bg-cellphones-50 text-lg hover:text-cellphones-500 font-semibold hover:border-l-4 hover:border-cellphones-600 border-t-2 border-gray-200 cursor-pointer">
                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                         Đăng xuất
                     </button>
                 </form>
             </section>
 
-            <section class="w-full h-fit col-span-12 md:col-span-8 lg:col-span-9 grid grid-cols-12 gap-3">
-                <div class="px-5 py-4 col-span-12 text-sm lg:text-[16px] flex justify-between items-center gap-4 bg-blue-50 text-blue-500 border-2 border-blue-300 rounded-2xl">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-                    <p class="flex-1 text-black">Thêm địa chỉ để đặt đơn hàng nhanh hơn.</p>
-                    <a href="user/user-info" class="font-semibold">Thêm địa chỉ</a>
-                </div>
-                <div class="p-4 col-span-12 xl:col-span-6 2xl:col-span-8 bg-white rounded-2xl">
-                    <h3 class="text-lg font-semibold">Đơn hàng gần đây</h3>
-                    <div id="recent-orders" class="mt-5 max-h-[500px] overflow-auto"></div>
-                </div>
-                <div class="p-4 col-span-12 xl:col-span-6 2xl:col-span-4 bg-white rounded-2xl">
-                    <h3 class="text-lg font-semibold">Ưu đãi của bạn</h3>
-                    <div id="vouchers" class="mt-5 max-h-[500px] overflow-auto"></div>
-                </div>
-                <div class="p-4 col-span-12 bg-white rounded-2xl">
-                    <h3 class="text-lg font-semibold">Sản phẩm yêu thích</h3>
-                    <div id="favourite-products" class="mt-5 max-h-[500px] overflow-auto"></div>
+            <section class="w-full h-fit col-span-12 md:col-span-8 lg:col-span-9 flex flex-col gap-3">
+                <div class="p-4 grid grid-cols-12 gap-3 bg-white rounded-2xl">
+                    <h3 class="font-semibold col-span-12">Hỗ trợ</h3>
+                    <div class="p-3 bg-gray-100 col-span-12 xl:col-span-6 flex justify-start items-center gap-3 rounded-2xl">
+                        <div class="w-[48px] h-[48px] bg-cellphones-400 rounded-xl flex justify-center items-center">
+                            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                                stroke-linejoin="round" class="text-white" height="28" width="28" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 14v-3a8 8 0 1 1 16 0v3"></path>
+                                <path d="M18 19c0 1.657 -2.686 3 -6 3"></path>
+                                <path d="M4 14a2 2 0 0 1 2 -2h1a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-1a2 2 0 0 1 -2 -2v-3z">
+                                </path>
+                                <path d="M15 14a2 2 0 0 1 2 -2h1a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-1a2 2 0 0 1 -2 -2v-3z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="flex flex-col justify-between items-start gap-1">
+                            <p class="font-semibold text-lg">Tư vấn mua hàng - Bảo hành (7h30 - 22h00)</p>
+                            <p class="text-sm text-gray-500">1800.2097</p>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-gray-100 col-span-12 xl:col-span-6 flex justify-start items-center gap-3 rounded-2xl">
+                        <div class="w-[48px] h-[48px] bg-cellphones-400 rounded-xl flex justify-center items-center">
+                            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                                stroke-linejoin="round" class="text-white" height="28" width="28" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 16m0 1a1 1 0 0 1 1 -1h1a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-1a1 1 0 0 1 -1 -1z"></path>
+                                <path
+                                    d="M6 20a1 1 0 0 0 1 1h3.756a1 1 0 0 0 .958 -.713l1.2 -3c.09 -.303 .133 -.63 -.056 -.884c-.188 -.254 -.542 -.403 -.858 -.403h-2v-2.467a1.1 1.1 0 0 0 -2.015 -.61l-1.985 3.077v4z">
+                                </path>
+                                <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                                <path d="M5 12.1v-7.1a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2h-2.3"></path>
+                            </svg>
+                        </div>
+                        <div class="flex flex-col justify-between items-start gap-1">
+                            <p class="font-semibold text-lg">Khiếu nại (8h00 - 21h30)</p>
+                            <p class="text-sm text-gray-500">1800.2063</p>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-gray-100 col-span-12 xl:col-span-6 flex justify-start items-center gap-3 rounded-2xl">
+                        <div class="w-[48px] h-[48px] bg-cellphones-400 rounded-xl flex justify-center items-center">
+                            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                                stroke-linejoin="round" class="text-white" height="28" width="28" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"></path>
+                                <path d="M3 7l9 6l9 -6"></path>
+                            </svg>
+                        </div>
+                        <div class="flex flex-col justify-between items-start gap-1">
+                            <p class="font-semibold text-lg">Email</p>
+                            <p class="text-sm text-gray-500">cskh@gmail.com</p>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
-        
+
         <!-- Menu Mobile -->
         <section
             class="px-20 pb-5 pt-1 fixed bottom-0 left-0 right-0 z-50 flex justify-between items-center md:hidden bg-white rounded-t-2xl"
             style="box-shadow: 0 -8px 24px 0 rgba(0,0,0,0.12), 0 -1.5px 4px 0 rgba(0,0,0,0.10);">
-            <a href="/" class="pt-2 flex flex-col items-center text-cellphones-700 border-t-4 border-cellphones-600">
+            <a href="/" class="pt-2 flex flex-col items-center">
                 <i class="fa-solid fa-house text-xl"></i>
                 <span class="text-xs">Trang chủ</span>
             </a>
@@ -145,18 +181,13 @@
                 </button>
             </form>
         </section>
-        
+
         <%- include("./partials/footer.ejs") %>
 
         <script>
             const user = <%- JSON.stringify(user) %>;
-            const vouchers = <%- JSON.stringify(vouchers) %>;
-            const favouriteProducts = <%- JSON.stringify(favouriteProducts) %>;
-            const recentOrders = <%- JSON.stringify(recentOrders) %>;
-            const errors = <%- typeof errors !== 'undefined' ? JSON.stringify(errors) : '[]' %>;
         </script>
-        <script src="/js/userOverall.js"></script>
-
+        <script src="/js/support.js"></script>
 </body>
 
 </html>

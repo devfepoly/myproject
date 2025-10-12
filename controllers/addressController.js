@@ -28,7 +28,7 @@ function getWards(req, res) {
 // Save into DB
 async function createAddress(req, res) {
     if (!req.user) {
-        res.redirect('/auth/login');
+        return res.redirect('/auth/login');
     }
     const user = req.user;
     const addressData = req.body;

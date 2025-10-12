@@ -1,10 +1,10 @@
 import { updateUserById } from '../services/CRUDService/UserService.js'
-import { getAllOrders, getOrdersByFilter } from '../services/CRUDService/OrderService.js';
+import { getOrdersByFilter } from '../services/CRUDService/OrderService.js';
 import * as addressService from "../services/CRUDService/AddressService.js"
 
 async function getUserOverall(req, res) {
     if (!req.user) {
-        res.redirect('/auth/login');
+        return res.redirect('/auth/login');
     }
 
     const user = req.user;
@@ -26,7 +26,7 @@ async function getUserOverall(req, res) {
 
 async function getUserInfo(req, res) {
     if (!req.user) {
-        res.redirect('/auth/login');
+        return res.redirect('/auth/login');
     }
 
     const user = req.user;

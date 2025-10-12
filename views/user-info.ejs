@@ -26,7 +26,7 @@
                     </div>
                     <div class="h-full flex flex-col justify-start items-start">
                         <h2 class="font-semibold text-xl">
-                            <%= user.name %>
+                            <%= user.name.length> 20 ? user.name.substring(0, 20) + "..." : user.name %>
                         </h2>
                         <p class="text-sm text-gray-500">
                             <%= user.email %>
@@ -295,14 +295,31 @@
                     </form>
                 
                     <% if (errors && errors.changePassword) { %>
-                        <p class="col-span-12 text-sm text-red-500 mt-2">
+                        <p class="col-span-12 text-sm text-red-500 font-semibold">
                             <%= errors.changePassword[0] %>
                         </p>
                     <% } %>
                 
                     <% if (successes && successes.changePassword) { %>
-                        <p class="col-span-12 text-sm text-green-600 mt-2">
+                        <p class="col-span-12 text-sm text-green-600 font-semibold">
                             Đổi mật khẩu thành công!
+                        </p>
+                    <% } %>
+
+                    <form action="/auth/forgot-password" method="POST" class="col-span-12 flex justify-end items-center">
+                        <input type="text" hidden name="email" value=<%= user.email %>>
+                        <p class="">Bạn quên mật khẩu? <button type="submit" class="px-3 py-2 bg-green-600 hover:bg-green-700 text-black hover:text-white rounded-lg cursor-pointer">Đặt lại</button> mật khẩu ngay.</p>
+                    </form>
+
+                    <% if (errors && errors.forgotPassword) { %>
+                        <p class="col-span-12 text-sm text-red-500 font-semibold">
+                            <%= errors.forgotPassword[0] %>
+                        </p>
+                    <% } %>
+                
+                    <% if (successes && successes.forgotPassword) { %>
+                        <p class="col-span-12 text-sm text-green-600 font-semibold">
+                            <%= successes.forgotPassword[0] %>
                         </p>
                     <% } %>
                 
@@ -318,7 +335,7 @@
         <section
             class="px-20 pb-5 pt-1 fixed bottom-0 left-0 right-0 z-50 flex justify-between items-center md:hidden bg-white rounded-t-2xl"
             style="box-shadow: 0 -8px 24px 0 rgba(0,0,0,0.12), 0 -1.5px 4px 0 rgba(0,0,0,0.10);">
-            <a href="/" class="pt-2 flex flex-col items-center text-cellphones-700 border-t-4 border-cellphones-600">
+            <a href="/" class="pt-2 flex flex-col items-center">
                 <i class="fa-solid fa-house text-xl"></i>
                 <span class="text-xs">Trang chủ</span>
             </a>
@@ -326,7 +343,7 @@
                 <i class="fa-regular fa-clipboard text-xl"></i>
                 <span class="text-xs">Đơn hàng</span>
             </a>
-            <a href="/user/user-info" class="pt-2 flex flex-col items-center">
+            <a href="" class="pt-2 flex flex-col items-center text-cellphones-700 border-t-4 border-cellphones-600">
                 <i class="fa-regular fa-user text-xl"></i>
                 <span class="text-xs">Tài khoản</span>
             </a>

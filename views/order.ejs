@@ -34,7 +34,7 @@
                     </div>
                     <div class="h-full flex flex-col justify-start items-start">
                         <h2 class="font-semibold text-xl">
-                            <%= user.name %>
+                            <%= user.name.length> 20 ? user.name.substring(0, 20) + "..." : user.name %>
                         </h2>
                         <p class="text-sm text-gray-500">
                             <%= user.email %>

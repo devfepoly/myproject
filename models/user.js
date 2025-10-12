@@ -38,6 +38,12 @@ const userSchema = new mongoose.Schema(
             enum: ["user", "admin"],
             default: "user",
         },
+        verify_token: {
+            type: String
+        },
+        token_expire: {
+            type: Date
+        }
     },
     {
         timestamps: true,

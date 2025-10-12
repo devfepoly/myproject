@@ -9,7 +9,6 @@ import logger from 'morgan';
 import dotenv from 'dotenv';
 import connectDB from './config/database.js';
 import methodOverride from "method-override";
-
 import authMiddleware from './middlewares/authMiddleware.js';
 import { indexRoute, authRoute, userRoute, orderRoute, addressRoute } from './routes/index.js';
 
@@ -36,9 +35,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-    secret: process.env.JWT_SECRET,
-    resave: false,
-    saveUninitialized: true
+  secret: process.env.JWT_SECRET,
+  resave: false,
+  saveUninitialized: true
 }));
 app.use((req, res, next) => {
     res.locals.errors = req.session.errors || {};

@@ -1,9 +1,9 @@
 import { getOrdersByFilter } from "../services/CRUDService/OrderService.js";
 import Order from "../models/Order.js";
 
-async function getOrder(req, res) {
+async function getOrder(req, res) {     
     if (!req.user) {
-        res.redirect('/auth/login');
+        return res.redirect('/auth/login');
     }
     const user = req.user;
     const { start_date, end_date, status } = req.query;
