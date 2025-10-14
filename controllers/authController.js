@@ -84,7 +84,9 @@ async function login(req, res) {
         secure: process.env.NODE_ENV === 'production',
         maxAge: 7 * 24 * 60 * 60 * 1000 // 7 day
     });
-    res.redirect('/');
+    console.log(user.role);
+    
+    return user.role === 'user' ? res.redirect('/') : res.redirect('/admin');
 }
 
 async function logout(req, res) {

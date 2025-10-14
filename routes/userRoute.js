@@ -12,5 +12,13 @@ router.get('/user-info', authMiddleware, userController.getUserInfo)
 /* POST update profile */
 router.patch("/update", authMiddleware, userController.updateUserProfile);
 
+router.get("/test", (req, res) => {
+    return res.render('home');
+})
+
+router.post("/test", (req, res) => {
+    
+})
+
 
 export default router;
