@@ -10,7 +10,8 @@ import dotenv from 'dotenv';
 import connectDB from './config/database.js';
 import methodOverride from "method-override";
 import authMiddleware from './middlewares/authMiddleware.js';
-import { indexRoute, authRoute, userRoute, orderRoute, addressRoute } from './routes/index.js';
+import limitAdminAccessMiddleware from './middlewares/limitAdminAccessMiddleware.js'
+import { indexRoute, authRoute, userRoute, orderRoute, addressRoute, adminRoute, categoryRoute } from './routes/index.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -50,12 +51,17 @@ app.use((req, res, next) => {
 // Middelware
 app.use(authMiddleware);
 
+// Limit admin access
+app.use(limitAdminAccessMiddleware);
+
 // Register routes
 app.use('/', indexRoute);
 app.use('/auth', authRoute);
 app.use('/user', userRoute);
 app.use('/order', orderRoute);
 app.use('/address', addressRoute);
+app.use('/admin', adminRoute);
+app.use('/category', categoryRoute);
 
 // Start server
 (async () => {
