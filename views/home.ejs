@@ -232,9 +232,41 @@
                 </section>
             </div>
         </main>
+        <!-- Menu Mobile -->
+        <section
+            class="px-20 pb-5 pt-1 fixed bottom-0 left-0 right-0 z-50 flex justify-between items-center md:hidden bg-white rounded-t-2xl"
+            style="box-shadow: 0 -8px 24px 0 rgba(0,0,0,0.12), 0 -1.5px 4px 0 rgba(0,0,0,0.10);">
+            <a href="/" class="pt-2 flex flex-col items-center text-cellphones-700 border-t-4 border-cellphones-600">
+                <i class="fa-solid fa-house text-xl"></i>
+                <span class="text-xs">Trang chủ</span>
+            </a>
+            <a href="/order" class="pt-2 flex flex-col items-center">
+                <i class="fa-regular fa-clipboard text-xl"></i>
+                <span class="text-xs">Đơn hàng</span>
+            </a>
+            <a href="/user/user-info" class="pt-2 flex flex-col items-center">
+                <i class="fa-regular fa-user text-xl"></i>
+                <span class="text-xs">Tài khoản</span>
+            </a>
+        
+            <% if (user) { %>
+                <form action="/auth/logout" method="POST">
+                    <button type="submit" class="pt-2 flex flex-col items-center">
+                        <i class="fa-solid fa-arrow-right-from-bracket text-xl"></i>
+                        <span class="text-xs">Đăng xuất</span>
+                    </button>
+                </form>
+                <% } else { %>
+                    <a href="/auth/login" class="pt-2 flex flex-col items-center">
+                        <i class="fa-solid fa-arrow-right-to-bracket text-xl"></i>
+                        <span class="text-xs">Đăng nhập</span>
+                    </a>
+                    <% } %>
+        </section>
+                        
         <%- include("./partials/footer.ejs") %>
 
-            <script src="/js/slider.js"></script>
+        <script src="/js/slider.js"></script>
 </body>
 
 </html>
