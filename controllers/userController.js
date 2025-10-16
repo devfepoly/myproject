@@ -1,6 +1,8 @@
-import { updateUserById } from '../services/CRUDService/UserService.js'
+import { updateUserById, getUserByEmail, createUser } from '../services/CRUDService/UserService.js'
 import { getOrdersByFilter } from '../services/CRUDService/OrderService.js';
 import * as addressService from "../services/CRUDService/AddressService.js"
+import User from '../models/User.js';
+import bcrypt from 'bcryptjs/dist/bcrypt.js';
 
 async function getUserOverall(req, res) {
     if (!req.user) {
@@ -82,8 +84,40 @@ async function updateUserProfile(req, res) {
     }
 }
 
+async function createUserT(req, res) {
+    const { email, name, password, gender, phone } = req.body;
+
+    if (!email || !name || !password) {
+        return res.status(400).json({ error: "Missing required fields." });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email && !emailRegex.test(email)) {
+        return res.status(400).json({ error: 'Email is invalid.' });
+    }
+
+    try {
+        const existingUser = await getUserByEmail(email);
+
+        if (existingUser) return res.status(400).json({ error: 'This email has been registed.' });
+
+        const password_hash = await bcrypt.hash(password, 10);
+
+        const newUser = await createUser({ name, email, phone, password_hash, gender })
+
+        return res.json({
+            success: true,
+            data: newUser
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "Server is broken." });
+    }
+}
+
 export {
     getUserOverall,
     getUserInfo,
-    updateUserProfile
+    updateUserProfile,
+    createUserT
 }
