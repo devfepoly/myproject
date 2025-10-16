@@ -11,15 +11,30 @@ if (!connectionString) {
     throw new Error("[database] Missing MongoDB connection string. Set DB_URI in your environment.");
 }
 
-let db;
+let cachedDbPromise;
+let cachedClient;
 
-try {
+async function initialiseConnection() {
     const client = new MongoClient(connectionString);
-    const conn = await client.connect();
-    db = conn.db(DATABASE_NAME);
-} catch (error) {
-    console.error("[database] Failed to connect to MongoDB:", error);
-    throw error;
+    await client.connect();
+    cachedClient = client;
+    return client.db(DATABASE_NAME);
 }
 
-export default db;
+export async function connectDB() {
+    if (!cachedDbPromise) {
+        cachedDbPromise = initialiseConnection().catch(error => {
+            cachedDbPromise = undefined;
+            console.error("[database] Failed to connect to MongoDB:", error);
+            throw error;
+        });
+    }
+
+    return cachedDbPromise;
+}
+
+export function getMongoClient() {
+    return cachedClient;
+}
+
+export default connectDB;
