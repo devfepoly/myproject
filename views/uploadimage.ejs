@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Ảnh</title>
+    <style>
+        /* CSS đơn giản */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .upload-container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Tùy chỉnh nút "Chọn tệp" */
+        input[type="file"]::file-selector-button {
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        input[type="file"]::file-selector-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Nút Gửi */
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="upload-container">
+        <h2>Tải ảnh của bạn lên</h2>
+        <p>Chỉ chấp nhận các tệp hình ảnh (jpg, png, gif...)</p>
+
+        <form action="/upload-image" method="POST" enctype="multipart/form-data">
+
+            <div>
+                <input type="file" id="imageFile" name="image" accept="image/*" required>
+            </div>
+
+            <button type="submit" class="submit-btn">Gửi ảnh</button>
+
+        </form>
+    </div>
+
+</body>
+
+</html>
