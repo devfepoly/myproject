@@ -5,7 +5,8 @@ import { createUser } from '../services/CRUDService/UserService.js'
 import dotenv from 'dotenv';
 dotenv.config();
 import CryptoJS from 'crypto-js';
-import generateRandomString from '../utils/generateRandomString.js'
+import generateRandomString from '../utils/generateRandomString.js';
+import resetPasswordMail from '../services/mailService/resetPasswordMail.js';
 
 async function register(req, res) {
     const { name, email, phone, password, confirm_password } = req.body;
@@ -176,7 +177,7 @@ async function forgotPassword(req, res) {
         });
         // Sending email
         const resetURL = `${process.env.DOMAIN}/auth/reset-password/${encodeURIComponent(resetTokenHash)}`;
-        console.log(resetURL);
+        resetPasswordMail(resetURL, email, "Laptopshop: Yêu cầu đặt lại mật khẩu");
 
         req.session.successes = { forgotPassword: ['Gửi yêu cầu thành công. Hãy kiểm tra email.'] };
         const redirectUrl = req.headers.referer || '/';

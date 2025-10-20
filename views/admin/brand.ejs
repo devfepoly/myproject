@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Brand</title>
+    <link rel="stylesheet" href="/stylesheets/output.css">
+</head>
+
+<body class="py-4 md:py-10 bg-gray-50">
+    <main class="px-3 md:px-10 xl:px-14 grid grid-cols-12 gap-5">
+        <%- include("../partials/admin-menu.ejs") %>
+
+            <div
+                class="w-full h-fit col-span-12 md:col-span-8 lg:col-span-9 flex flex-col justify-start items-start gap-3">
+                <div class="py-5 px-4 w-full min-h-[500px] bg-white rounded-xl">
+                    <!-- Overview -->
+                    <div class="mb-8 w-full flex justify-between items-center">
+                        <h1 class="font-bold text-lg md:text-2xl">Brand</h1>
+                    </div>
+
+                    <!-- Search bar -->
+                    <form id="search-bar" class="w-full grid grid-cols-12 gap-4 items-center">
+                        <div
+                            class="w-full col-span-7 grid grid-cols-12 gap-1 border-2 border-gray-500 rounded-3xl content-center">
+                            <i
+                                class="px-2 md:px-3 py-3 bg-gray-100 fa-solid fa-magnifying-glass col-span-2 md:col-span-1 rounded-l-3xl"></i>
+                            <input id="input-query" type="text" name="q" placeholder="Tìm kiếm bằng tên, mô tả"
+                                class="col-span-9 md:col-span-10 outline-0">
+                            <i
+                                class="px-1 md:px-3 py-3 fa-solid fa-xmark col-span-1 hover:text-cellphones-700 cursor-pointer"></i>
+                        </div>
+                        <div class="col-span-5 md:col-span-3 flex items-center gap-2">
+                            <input type="checkbox" id="status-checkbox" name="status" value="active"
+                                class="w-4 h-4 text-cellphones-600 bg-gray-100 border-gray-300 rounded focus:ring-cellphones-500 cursor-pointer accent-green-700">
+                            <label for="status-checkbox"
+                                class="text-gray-700 font-medium cursor-pointer select-none">Đang
+                                hoạt
+                                động</label>
+                        </div>
+                        <button type="submit"
+                            class="col-span-12 md:col-span-2 py-3 md:py-2 px-5 bg-cellphones-600 text-white font-semibold rounded-3xl hover:bg-cellphones-700 active:bg-cellphones-800 transition-colors cursor-pointer">
+                            Tìm kiếm
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Add new brand -->
+                <div id="add-brand-section" class="py-5 px-4 w-full bg-white rounded-xl">
+                    <div class="mb-8 w-full flex justify-between items-center">
+                        <h2 class="text-2xl font-bold mb-6">Thêm Brand Mới</h2>
+                        <p class="font-semibold text-cellphones-500 hover:text-cellphones-700 hover:underline">
+                            <i class="fa-solid fa-plus"></i>
+                            Thêm Brand mới
+                        </p>
+                    </div>
+                    <form id="add-brand-form">
+                        <div class="mb-4">
+                            <label for="brand-name" class="block text-gray-700 text-sm font-bold mb-2">Tên
+                                Brand:</label>
+                            <input type="text" id="brand-name" name="name" required
+                                class="shadow-sm appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-cellphones-300 focus:border-cellphones-500 transition">
+                            <p class="text-xs text-gray-500 mt-2">Lưu ý: Tên brand không được trùng với các brand đã có.
+                            </p>
+                        </div>
+                        <div class="mb-6">
+                            <label for="brand-description" class="block text-gray-700 text-sm font-bold mb-2">Mô
+                                tả:</label>
+                            <textarea id="brand-description" name="description" rows="4"
+                                class="shadow-sm appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-cellphones-300 focus:border-cellphones-500 transition"></textarea>
+                        </div>
+                        <div class="flex items-center justify-end gap-4">
+                            <button id="cancel-add-brand" type="button"
+                                class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded transition-colors focus:outline-none focus:shadow-outline">Hủy</button>
+                            <button
+                                class="bg-cellphones-600 hover:bg-cellphones-700 text-white font-bold py-2 px-4 rounded transition-colors focus:outline-none focus:shadow-outline">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </main>
+
+    <script src="/js/brand.js"></script>
+</body>
+
+</html>

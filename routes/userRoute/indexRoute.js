@@ -1,15 +1,15 @@
 import express from 'express';
 const router = express.Router();
-import authMiddleware from "../middlewares/authMiddleware.js"
-import * as indexController from "../controllers/indexController.js"
-import upload from "../config/multer.js"
+import authMiddleware from "../../middlewares/authMiddleware.js"
+import * as indexController from "../../controllers/userController/indexController.js"
+import upload from "../../config/multer.js"
 
-/* GET home page. */
+/* GET home page */
 router.get('/', (req, res, next) => {
   res.render('home');
 });
 
-//
+/* GET support page */
 router.get('/support', authMiddleware, indexController.getSupport);
 
 router.get('/upload-image', (req, res) => {

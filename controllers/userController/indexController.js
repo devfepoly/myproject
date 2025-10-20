@@ -1,4 +1,4 @@
-import { getOrdersByFilter } from "../services/CRUDService/OrderService.js";
+import { getOrdersByFilter } from "../../services/CRUDService/OrderService.js";
 
 async function getSupport(req, res) {
     if (!req.user) {

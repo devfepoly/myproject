@@ -24,6 +24,7 @@ const app = express();
 
 // Set up view engine
 app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views/admin'))
 app.set('view engine', 'ejs');
 
 // Middleware setup

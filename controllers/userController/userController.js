@@ -1,7 +1,7 @@
-import { updateUserById, getUserByEmail, createUser } from '../services/CRUDService/UserService.js'
-import { getOrdersByFilter } from '../services/CRUDService/OrderService.js';
-import * as addressService from "../services/CRUDService/AddressService.js"
-import User from '../models/User.js';
+import { updateUserById, getUserByEmail, createUser } from '../../services/CRUDService/UserService.js'
+import { getOrdersByFilter } from '../../services/CRUDService/OrderService.js';
+import * as addressService from "../../services/CRUDService/AddressService.js"
+import User from '../../models/User.js';
 import bcrypt from 'bcryptjs/dist/bcrypt.js';
 
 async function getUserOverall(req, res) {
@@ -14,7 +14,7 @@ async function getUserOverall(req, res) {
     try {
         const orders = await getOrdersByFilter({ user_id: user._id }, { sortOrder: 'desc' });
         const grandTotalOrders = orders.reduce((prev, curr) => prev + curr.grand_total, 0)
-        const recentOrders = orders.slice(0, 5);        
+        const recentOrders = orders.slice(0, 5);
 
         res.render('user-overall', { totalOrders: orders.length, grandTotalOrders, recentOrders, vouchers: [], favouriteProducts: [] });
     } catch (error) {

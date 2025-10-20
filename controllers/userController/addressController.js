@@ -1,5 +1,5 @@
-import Address from "../models/Address.js";
-import * as addressService from "../services/CRUDService/AddressService.js";
+import Address from "../../models/Address.js";
+import * as addressService from "../../services/CRUDService/AddressService.js";
 import fetch from "node-fetch";
 
 // API get Provinces

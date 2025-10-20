@@ -1,7 +1,7 @@
-import { getOrdersByFilter } from "../services/CRUDService/OrderService.js";
-import Order from "../models/Order.js";
+import { getOrdersByFilter } from "../../services/CRUDService/OrderService.js";
+import Order from "../../models/Order.js";
 
-async function getOrder(req, res) {     
+async function getOrder(req, res) {
     if (!req.user) {
         return res.redirect('/auth/login');
     }
